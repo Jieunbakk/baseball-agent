@@ -1,0 +1,101 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 야구공 ── */
+.ball-wrapper {
+  width: var(--ball-size);
+  height: var(--ball-size);
+  cursor: grab;
+  transform-origin: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ball-wrapper svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.22));
+  opacity: var(--ball-opacity-idle);
+  transform: scale(1);
+  transition: var(--transition-fast);
+  transform-origin: center;
+}
+
+.ball-wrapper:hover svg {
+  opacity: 1;
+  transform: scale(var(--scale-hover));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.30));
+}
+
+.ball-wrapper.is-dragging {
+  cursor: grabbing;
+}
+
+.ball-wrapper.is-dragging svg {
+  opacity: 0.92;
+  transform: scale(var(--scale-drag));
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.38));
+}
+
+.ball-wrapper.is-thinking svg {
+  animation: ball-thinking 1.6s var(--ease-default) infinite;
+}
+
+/* ── 패널 ── */
+.chat-panel {
+  width: var(--panel-width);
+  height: var(--panel-height);
+  background: var(--panel-bg);
+  backdrop-filter: var(--panel-backdrop);
+  -webkit-backdrop-filter: var(--panel-backdrop);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--shadow-panel);
+  border: 1px solid var(--panel-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: top left;
+  animation: panel-slide-in var(--duration-medium) var(--ease-out);
+}
+
+/* ── 애니메이션 ── */
+@keyframes panel-slide-in {
+  from { opacity: 0; transform: translateX(-10px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0)     scale(1); }
+}
+
+@keyframes cursor-blink {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0.2; }
+}
+
+@keyframes ball-thinking {
+  0%, 100% { transform: rotate(-1.5deg) scale(1); }
+  50%      { transform: rotate(1.5deg)  scale(1); }
+}
+
+/* ── 스크롤바 ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(15, 23, 42, 0.15); border-radius: 999px; }
+
+/* ── reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

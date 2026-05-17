@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Baseball Icon — Floating Desktop Widget
+  Style: Flat illustration, cute & minimal (ref: /ball/25475.jpg)
+  viewBox: 100x100 (scalable). Use as <img src> or inline.
+  Colors are tokenized via CSS variables (with hex fallback).
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 100 100"
+     width="100"
+     height="100"
+     role="img"
+     aria-label="Baseball assistant">
+
+  <defs>
+    <!-- Soft drop shadow used when ball is floating -->
+    <filter id="ball-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.32"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Radial highlight gradient on the upper-right -->
+    <radialGradient id="ball-highlight-grad" cx="0.32" cy="0.28" r="0.55">
+      <stop offset="0%"  stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <g filter="url(#ball-shadow)">
+    <!-- Ball body -->
+    <circle cx="50" cy="50" r="42"
+            fill="var(--baseball-ball-bg, #f5f5f3)"/>
+
+    <!-- Glossy highlight (upper-right) -->
+    <circle cx="50" cy="50" r="42"
+            fill="url(#ball-highlight-grad)"/>
+
+    <!-- Left spine (gray curve) -->
+    <path d="M 33 14 Q 22 50 33 86"
+          fill="none"
+          stroke="var(--baseball-spine, #9ca3af)"
+          stroke-width="2.2"
+          stroke-linecap="round"/>
+
+    <!-- Right spine (gray curve) -->
+    <path d="M 67 14 Q 78 50 67 86"
+          fill="none"
+          stroke="var(--baseball-spine, #9ca3af)"
+          stroke-width="2.2"
+          stroke-linecap="round"/>
+
+    <!-- LEFT stitches: V-shapes opening to the LEFT, attached to left spine -->
+    <g stroke="var(--baseball-stitch, #c0392b)"
+       stroke-width="2.2"
+       stroke-linecap="round"
+       fill="none">
+      <!-- Each stitch = two short strokes forming a V pointing right (toward center is closed, opens left) -->
+      <!-- y positions ride along the left spine curve -->
+      <path d="M 33 18 L 27 16  M 33 18 L 27 22"/>
+      <path d="M 30 26 L 24 24  M 30 26 L 24 30"/>
+      <path d="M 28 34 L 22 32  M 28 34 L 22 38"/>
+      <path d="M 26 42 L 20 40  M 26 42 L 20 46"/>
+      <path d="M 25 50 L 19 48  M 25 50 L 19 54"/>
+      <path d="M 26 58 L 20 56  M 26 58 L 20 62"/>
+      <path d="M 28 66 L 22 64  M 28 66 L 22 70"/>
+      <path d="M 30 74 L 24 72  M 30 74 L 24 78"/>
+      <path d="M 33 82 L 27 80  M 33 82 L 27 84"/>
+    </g>
+
+    <!-- RIGHT stitches: V-shapes opening to the RIGHT -->
+    <g stroke="var(--baseball-stitch, #c0392b)"
+       stroke-width="2.2"
+       stroke-linecap="round"
+       fill="none">
+      <path d="M 67 18 L 73 16  M 67 18 L 73 22"/>
+      <path d="M 70 26 L 76 24  M 70 26 L 76 30"/>
+      <path d="M 72 34 L 78 32  M 72 34 L 78 38"/>
+      <path d="M 74 42 L 80 40  M 74 42 L 80 46"/>
+      <path d="M 75 50 L 81 48  M 75 50 L 81 54"/>
+      <path d="M 74 58 L 80 56  M 74 58 L 80 62"/>
+      <path d="M 72 66 L 78 64  M 72 66 L 78 70"/>
+      <path d="M 70 74 L 76 72  M 70 74 L 76 78"/>
+      <path d="M 67 82 L 73 80  M 67 82 L 73 84"/>
+    </g>
+  </g>
+</svg>
